@@ -1,0 +1,51 @@
+Hello,
+
+The api gateway that I coded is already embedded in the App.js file
+
+I used json-server to connect db.json (aka the API) to the internet then used fetch API method 
+to gather the json data. Using the json-server tools, I was able to filter the data by the given
+search tag in the webpage. The api gateway code is shown below this txt file.
+
+To open the server:
+    - open a new terminal and type 'cd json-server'
+    - type 'yarn start' into the terminal
+    - this should start the json-server at localhost port 9000
+
+To open the webpage:
+    - open a different terminal and type 'cd web'
+    - type 'yarn start' into the terminal
+    - this should start the webpage at localhost port 3000
+    - if the json-server is active, the webpage should work flawlessly
+
+==================================================================================
+API GATEWAY Code
+
+useEffect( () => {
+    fetch("http://localhost:9000/trips")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setUsers(data) 
+      }) 
+  }, [])
+
+  useEffect( () => {
+    if(!search) {
+      fetch("http://localhost:9000/trips")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setUsers(data) 
+      })
+    } else {
+      fetch("http://localhost:9000/trips?q="+search)
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setUsers(data) 
+      })
+    }
+  }, [search])
